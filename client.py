@@ -23,7 +23,8 @@ class Game:
                 delete_eat.append(eat_center)
                 self.player.eating()
             self.display.blit(eat_obj.surf(), eat_obj)
-        self.eats.del_eat(delete_eat)
+        if delete_eat:
+            self.eats.del_eat(delete_eat)
 
     def start_game(self):
         while True:
@@ -34,7 +35,7 @@ class Game:
 
             self.display.blit(self.player.surf(), self.player)
             keys = pg.key.get_pressed()
-            self.player.move(keys)
+            self.player.move_player(keys, self.eats)
 
             pg.display.update()
             self.clock.tick(60)
